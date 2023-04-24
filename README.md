@@ -56,7 +56,7 @@ clicking the back button should take you back to search results)
 | Search results | /search?query=<search term> | A list of results that match the search performed, and link through to the details page. The list should show: <br>✅ Title<br>✅ Destination<br>✅ Lead photo              |
 | Sale details   | /sale/<ID>                  | A page with more rich information about the hotel/sale in question. The page should include:<br>✅ Title<br>✅ Destination<br>✅ Lead photo<br>✅ Hotel details<br>✅ Price |
 
-### Tecnologias which have been used 🔥
+### Technologies which have been used 🔥
 
 - [ReactJS](https://react.dev/)
 - [React-Router](https://reactrouter.com/en/6.10.0)
