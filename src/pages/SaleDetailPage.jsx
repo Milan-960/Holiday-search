@@ -1,55 +1,84 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { fetchSaleDetails } from "../api";
+import React from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
+import parse from "html-react-parser";
+
+import { fetchSaleDetails } from "../api";
+import useFetchData from "../hooks/useFetchData";
 
 const SaleDetailPage = () => {
-  const [details, setDetails] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
+  const {
+    data: details,
+    isLoading,
+    error,
+  } = useFetchData(fetchSaleDetails, id);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchSaleDetails(id);
-      setDetails(data);
-    };
+  // Destructure 'details' object to get necessary data,
+  // providing default values
+  const {
+    editorial: { destinationName, title } = {},
+    photos,
+    prices: { leadRate: { forDisplay } = {} } = {},
+  } = details || {};
 
-    fetchData();
-  }, [id]);
+  const goBackToResult = () => {
+    navigate(-1);
+  };
 
-  if (!details) {
-    return <div>Loading...</div>;
+  // this function is to parse hotel details and render them as HTML
+  const renderHotelDetails = () => {
+    return parse(details.editorial.hotelDetails);
+  };
+
+  if (error) {
+    return <div>Oops! Something went wrong!</div>;
   }
 
   return (
     <div className="sale-detail-page">
-      <h1>Hotel Details</h1>
-      <h2>{details.editorial.title}</h2>
-      <p>{details.editorial.destinationName}</p>
-      {details.photos.length > 0 && (
-        <div className="carousel-container">
-          <Carousel>
-            {details.photos.map((photo, index) => (
-              <div key={index}>
-                <img
-                  className="carousel-img"
-                  src={photo.url}
-                  alt={`${details.editorial.title}-${index}`}
-                />
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          {details && (
+            <>
+              <h1>Hotel Details</h1>
+              <Link onClick={goBackToResult}>Go back</Link>
+              <h2>{title}</h2>
+              <p>{destinationName}</p>
+              {photos && photos.length > 0 && (
+                <div className="carousel-container">
+                  <Carousel>
+                    {photos.map((photo, index) => (
+                      <div key={index}>
+                        <img
+                          className="carousel-img"
+                          src={photo.url}
+                          alt={`${title}-${index}`}
+                        />
+                      </div>
+                    ))}
+                  </Carousel>
+                </div>
+              )}
+              <div className="detail-box">
+                <div>
+                  <h2>Hotel Details</h2>
+                  <div className="hotel-details-content">
+                    {renderHotelDetails()}
+                  </div>
+                </div>
+                <div>
+                  <h2>Price</h2>
+                  <p>{forDisplay}</p>
+                </div>
               </div>
-            ))}
-          </Carousel>
-        </div>
+            </>
+          )}
+        </>
       )}
-      <div className="detail-box">
-        <div>
-          <h2>Hotel Details</h2>
-          <p>{details.editorial.hotelDetails}</p>
-        </div>
-        <div>
-          <h2>Price</h2>
-          <p>{details.prices.leadRate.forDisplay}</p>
-        </div>
-      </div>
     </div>
   );
 };

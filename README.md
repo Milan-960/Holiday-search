@@ -1,73 +1,67 @@
-# Getting Started with Create React App
+# Secret Escapes Hotel Search!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Seach result page
 
-## Available Scripts
+<img align="right" src="./SS/home.png" width="100%"/>&nbsp;
+&nbsp;
 
-In the project directory, you can run:
+<img align="right" src="./SS/seachresult.png" width="100%"/>&nbsp;
+&nbsp;
 
-### `npm start`
+## Sale details page
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<img align="right" src="./SS/saledetails.png" width="100%"/>&nbsp;
+&nbsp;
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## How to start this ptoject!
 
-### `npm test`
+# Note This project was created using node version **v17.4.0**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## clone the branch
 
-### `npm run build`
+```
+git clone https://github.com/Milan-960/Holiday-search.git
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Install dependecies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## run on the localhost
 
-### `npm run eject`
+```
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Assignment Criteria
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+● Users should be able to search by free text
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+● Search results should show the total number of results
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+● Search results should only include the first 10 sales in the list
 
-## Learn More
+● Each search result should link to the sale detail page
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+● Browser navigation should work (e.g. going from search results to sale details and
+clicking the back button should take you back to search results)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## All of the functionality has been added!
 
-### Code Splitting
+| Details        | Route                       | Description                                                                                                                                                                 |
+| -------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Homepage       | /                           | Simply contains a search box for a user's location query.                                                                                                                   |
+| Search results | /search?query=<search term> | A list of results that match the search performed, and link through to the details page. The list should show: <br>✅ Title<br>✅ Destination<br>✅ Lead photo              |
+| Sale details   | /sale/<ID>                  | A page with more rich information about the hotel/sale in question. The page should include:<br>✅ Title<br>✅ Destination<br>✅ Lead photo<br>✅ Hotel details<br>✅ Price |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Tecnologias which have been used 🔥
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [ReactJS](https://react.dev/)
+- [React-Router](https://reactrouter.com/en/6.10.0)
+- [Graphql](https://graphql.org/)
+- [HTML React Parser](https://www.npmjs.com/package/html-react-parser)
 
 ## Here are the links to the branches!
 

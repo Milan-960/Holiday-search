@@ -1,46 +1,72 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { fetchSearchResults } from "../api";
+import useFetchData from "../hooks/useFetchData";
 
 const SearchResultsPage = () => {
-  const [results, setResults] = useState([]);
+  // Get the current location and extract the search query from the URL
   const location = useLocation();
   const navigate = useNavigate();
+  const searchParams = new URLSearchParams(location.search);
+  const query = searchParams.get("query");
 
-  const goBack = () => {
+  // Use the custom hook to fetch search results
+  const { data, isLoading, error } = useFetchData(fetchSearchResults, query);
+  const searchResults = data && data.sales ? data.sales : [];
+
+  const goBackToSearch = () => {
     navigate(-1);
   };
 
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const query = searchParams.get("query");
-
-    fetchSearchResults(query).then((data) => {
-      setResults(data.sales);
-    });
-  }, [location.search]);
+  const goForward = (event) => {
+    event.preventDefault();
+    navigate(1);
+  };
 
   const handleResultClick = (id) => {
     navigate(`/sale/${id}`);
   };
 
+  if (error) {
+    return <div>Oops! Something went wrong!</div>;
+  }
+
   return (
     <div className="search-results-page">
-      <h1>Search Results</h1>
-      <Link onClick={goBack}>Go Back</Link>
-      <div className="results-grid">
-        {results.map((result) => (
-          <div
-            key={result.id}
-            className="result-box"
-            onClick={() => handleResultClick(result.id)}
-          >
-            <h2>{result.editorial.title}</h2>
-            <p>{result.editorial.destinationName}</p>
-            <img src={result.photos[0].url} alt={result.editorial.title} />
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          <h1>Search Results</h1>
+          <p>Total Results: {searchResults.length}</p>
+          <div className="link-buttons">
+            <Link onClick={goBackToSearch}>Go back</Link>
+            <Link onClick={goForward}>Go forward</Link>
           </div>
-        ))}
-      </div>
+          {!Array.isArray(searchResults) || searchResults.length === 0 ? (
+            <p>Sorry, we couldn't find any results for your search</p>
+          ) : (
+            <>
+              <div className="results-grid">
+                {searchResults.map((result, index) => (
+                  <div
+                    key={index}
+                    className="result-box"
+                    onClick={() => handleResultClick(result.id)}
+                  >
+                    <h3>{result.editorial.title}</h3>
+                    <img
+                      src={result.photos[0].url}
+                      alt={result.editorial.title}
+                    />
+                    <p>{result.editorial.destinationName}</p>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </>
+      )}
     </div>
   );
 };
