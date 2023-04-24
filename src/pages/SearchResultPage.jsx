@@ -38,6 +38,7 @@ const SearchResultsPage = () => {
       ) : (
         <>
           <h1>Search Results</h1>
+          <p>Total Results: {searchResults.length}</p>
           <div className="link-buttons">
             <Link onClick={goBackToSearch}>Go back</Link>
             <Link onClick={goForward}>Go forward</Link>

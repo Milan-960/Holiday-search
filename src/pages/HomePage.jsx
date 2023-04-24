@@ -15,7 +15,7 @@ const HomePage = () => {
   };
 
   return (
-    <div>
+    <div className="home-page">
       <h1>Search for a Holiday</h1>
 
       <form onSubmit={handleSearch}>

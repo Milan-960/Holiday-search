@@ -30,8 +30,6 @@ export const fetchSearchResults = async (query) => {
   // Make the API request with the query and variables
   const response = await client.request(queryStr, variables);
 
-  console.log("Search Results:", response.saleSearch);
-
   // error
   if (response.saleSearch.resultCount === 0) {
     return { notFound: true };
@@ -68,8 +66,10 @@ export const fetchSaleDetails = async (saleId) => {
 
   const data = await client.request(SALE_DETAILS_QUERY, variables);
 
-  console.log("Sale Details:", data.sale);
-
+  // Check if the sale property exists in the returned data object
+  if (!data.sale) {
+    return { notFound: true };
+  }
   // Return the sale details
   return data.sale;
 };

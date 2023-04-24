@@ -46,7 +46,7 @@ const SaleDetailPage = () => {
             <>
               <h1>Hotel Details</h1>
               <Link onClick={goBackToResult}>Go back</Link>
-              <h1>{title}</h1>
+              <h2>{title}</h2>
               <p>{destinationName}</p>
               {photos && photos.length > 0 && (
                 <div className="carousel-container">
