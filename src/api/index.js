@@ -1,0 +1,1 @@
+export { fetchSearchResults } from "./Api";
