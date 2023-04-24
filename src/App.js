@@ -1,8 +1,10 @@
 import React from "react";
 
+import AppRoutes from "./routes/AppRoutes";
+
 import "./styles/Global.scss";
 import "./index.css";
-import AppRoutes from "./routes/AppRoutes";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const App = () => {
   return (

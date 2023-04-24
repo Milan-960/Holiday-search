@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { fetchSearchResults } from "../api";
 
 const SearchResultsPage = () => {
   const [results, setResults] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -23,6 +27,7 @@ const SearchResultsPage = () => {
   return (
     <div className="search-results-page">
       <h1>Search Results</h1>
+      <Link onClick={goBack}>Go Back</Link>
       <div className="results-grid">
         {results.map((result) => (
           <div
