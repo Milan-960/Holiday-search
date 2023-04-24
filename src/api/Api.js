@@ -32,6 +32,11 @@ export const fetchSearchResults = async (query) => {
 
   console.log("Search Results:", response.saleSearch);
 
+  // error
+  if (response.saleSearch.resultCount === 0) {
+    return { notFound: true };
+  }
+
   // Return the search results
   return response.saleSearch;
 };
@@ -59,9 +64,8 @@ export const fetchSaleDetails = async (saleId) => {
     }
   `;
 
-  // Define the variables for the query
   const variables = { saleId };
-  // Make the API request with the query and variables
+
   const data = await client.request(SALE_DETAILS_QUERY, variables);
 
   console.log("Sale Details:", data.sale);
