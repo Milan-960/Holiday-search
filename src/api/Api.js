@@ -35,3 +35,37 @@ export const fetchSearchResults = async (query) => {
   // Return the search results
   return response.saleSearch;
 };
+
+// Define a function to fetch sale details based on the saleId
+export const fetchSaleDetails = async (saleId) => {
+  // Define the GraphQL query for fetching sale details
+  const SALE_DETAILS_QUERY = gql`
+    query ($saleId: String!) {
+      sale(saleId: $saleId) {
+        editorial {
+          title
+          destinationName
+          hotelDetails
+        }
+        prices {
+          leadRate {
+            forDisplay
+          }
+        }
+        photos {
+          url
+        }
+      }
+    }
+  `;
+
+  // Define the variables for the query
+  const variables = { saleId };
+  // Make the API request with the query and variables
+  const data = await client.request(SALE_DETAILS_QUERY, variables);
+
+  console.log("Sale Details:", data.sale);
+
+  // Return the sale details
+  return data.sale;
+};
