@@ -1,15 +1,15 @@
 import React from "react";
 
 import "./styles/Global.scss";
+import "./index.css";
 import AppRoutes from "./routes/AppRoutes";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <h1>Welcome to your Dream Holiday Search</h1>
       <AppRoutes />
     </div>
   );
-}
+};
 
 export default App;
